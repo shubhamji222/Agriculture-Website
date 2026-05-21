@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Farmers - AgriManager{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1 class="h3"><i class="bi bi-people-fill"></i> Farmers</h1>
+    <p class="text-muted">Review farmer profiles, village details, and federation links.</p>
+  </div>
+</div>
+
+<div class="card shadow-sm border-0">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered align-middle">
+        <thead class="table-secondary">
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Village</th>
+            <th>Mobile</th>
+            <th>Federation</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for farmer in farmers %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ farmer.name }}</td>
+            <td>{{ farmer.village }}</td>
+            <td>{{ farmer.mobile }}</td>
+            {% comment %} <td>{{ farmer.federation.name if farmer.federation else 'N/A' }}</td> {% endcomment %}
+            <td>{{ farmer.federation.name|default:"N/A" }}</td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="5" class="text-center text-muted">No farmers registered yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
