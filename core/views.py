@@ -1,6 +1,12 @@
+import django
 from django.db.models import Sum
+from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import request, viewsets
+from rest_framework.authentication import BasicAuthentication, TokenAuthentication
+from rest_framework.permissions import IsAuthenticated,IsAdminUser
+ 
 from .models import Federation, Farmer, FarmerPayment, Procurement, Purchase, Sale, Dispatch
 from .serializers import (
     FederationSerializer,
@@ -95,33 +101,48 @@ def payments_page(request):
 class SaleViewSet(viewsets.ModelViewSet):
     queryset = Sale.objects.all()
     serializer_class = SaleSerializer
+    authentication_classes = [BasicAuthentication,]
+    permission_classes = [IsAuthenticated]
 
 
 class PurchaseViewSet(viewsets.ModelViewSet):
     queryset = Purchase.objects.all()
     serializer_class = PurchaseSerializer
+    authentication_classes = [BasicAuthentication,]
+    permission_classes = [IsAdminUser]
 
 
 class DispatchViewSet(viewsets.ModelViewSet):
     queryset = Dispatch.objects.all()
     serializer_class = DispatchSerializer
+    
 
 
 class ProcurementViewSet(viewsets.ModelViewSet):
     queryset = Procurement.objects.all()
     serializer_class = ProcurementSerializer
+    
+    authentication_classes = [BasicAuthentication,]
+    permission_classes = [IsAdminUser]
 
 
 class FarmerViewSet(viewsets.ModelViewSet):
     queryset = Farmer.objects.all()
     serializer_class = FarmerSerializer
+    
+    authentication_classes = [BasicAuthentication,]
+    permission_classes = [IsAdminUser]
 
 
 class FarmerPaymentViewSet(viewsets.ModelViewSet):
     queryset = FarmerPayment.objects.all()
     serializer_class = FarmerPaymentSerializer
+    authentication_classes = [BasicAuthentication,]
+    permission_classes = [IsAdminUser]
 
 
 class FederationViewSet(viewsets.ModelViewSet):
     queryset = Federation.objects.all()
     serializer_class = FederationSerializer
+    authentication_classes = [BasicAuthentication,]
+    permission_classes = [IsAdminUser]

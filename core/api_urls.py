@@ -1,6 +1,8 @@
+from django import views
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken.views import obtain_auth_token
+from .views import *
 from .views import (
     SaleViewSet,
     PurchaseViewSet,
@@ -22,6 +24,8 @@ router.register('federations', FederationViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('token-auth/', obtain_auth_token, name='api_token_auth'),
+    path('auth-token/', obtain_auth_token, name='api_token_auth'),
+    # path('profile/', views.user_profile, name='user_profile'),
+    # path('admin-panel/', views.admin_panel, name='admin_panel'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

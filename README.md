@@ -50,8 +50,8 @@ python manage.py runserver
 - `http://127.0.0.1:8000/api/payments/`
 - `http://127.0.0.1:8000/api/federations/`
 
-## Notes
+<!-- ## Notes
 
 - Use Django admin to add data or create API clients.
 - Templates are in `core/templates/core`.
-- Static CSS/JS are in `core/static/core`.
+- Static CSS/JS are in `core/static/core`. -->
