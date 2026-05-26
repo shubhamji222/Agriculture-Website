@@ -1,9 +1,8 @@
-import django
+
 from django.db.models import Sum
 from django.contrib.auth.models import User
-from rest_framework.authtoken.models import Token
 from django.shortcuts import render
-from rest_framework import request, viewsets
+from rest_framework import  viewsets
 from rest_framework.authentication import BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated,IsAdminUser
  
@@ -116,23 +115,25 @@ class DispatchViewSet(viewsets.ModelViewSet):
     queryset = Dispatch.objects.all()
     serializer_class = DispatchSerializer
     
+    authentication_classes = [TokenAuthentication,]
+    permission_classes = [IsAuthenticated,]
+    
 
 
 class ProcurementViewSet(viewsets.ModelViewSet):
     queryset = Procurement.objects.all()
     serializer_class = ProcurementSerializer
     
-    authentication_classes = [BasicAuthentication,]
-    permission_classes = [IsAdminUser]
+    authentication_classes = [TokenAuthentication,]
+    permission_classes = [IsAuthenticated,]
 
 
 class FarmerViewSet(viewsets.ModelViewSet):
     queryset = Farmer.objects.all()
     serializer_class = FarmerSerializer
     
-    authentication_classes = [BasicAuthentication,]
-    permission_classes = [IsAdminUser]
-
+    authentication_classes = [TokenAuthentication,]
+    permission_classes = [IsAuthenticated,]
 
 class FarmerPaymentViewSet(viewsets.ModelViewSet):
     queryset = FarmerPayment.objects.all()
